@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8" />
+    <title>View Lecture Join</title>
+</head>
+<!-- GETTING DATA FROM VIEWS -->
+<body>
+
+<h1 th:text="${cohort}"></h1> <!-- Displays info set in ViewLecture.java line 39 -->
+
+<form action="/join" method="post"> <!-- Sends user input to ViewLecture.java line 38 -->
+    <input type="text" name="cohort" id="cohort-ip" class="field" />
+    <button>Join now</button>
+</form>
+
+
+<!-- OTHER TAGS -->
+
+                        <!-- each -->
+<!--<div th:each="item : ${shoppingCart}">-->
+<!--    <p th:text="${item.name}" />-->
+<!--</div>-->
+
+                        <!-- if -->
+<!--<div class="alert alert-danger" th:if="${page_has_error}">-->
+<!--    Something bad happened!-->
+<!--</div>-->
+
+
+<!-- TEMPLATING -->
+
+                        <!-- fragments -->
+<!--<div th:fragment="my-partial">-->
+<!--    partial content goes here...-->
+<!--</div>-->
+
+</body>
+</html>

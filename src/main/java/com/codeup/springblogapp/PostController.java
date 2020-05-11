@@ -28,9 +28,9 @@ public class PostController {
         return "view the form for creating a post!";
     }
 
-    @PostMapping("posts/create")
+    @PostMapping("/posts/create")
     @ResponseBody
-    public String postsCreateP(){
-        return "create a new post or something idk";
+    public String postsCreateP(){ // would normally be a void, but for this exercise...
+        return "create a new post or something idk"; // was this supposed to be more complex?
     }
 }

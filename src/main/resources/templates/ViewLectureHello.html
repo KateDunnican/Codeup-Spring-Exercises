@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"> <!-- Needs this for Thymeleaf -->
+<head>
+    <meta charset="UTF-8">
+    <title>View Lecture Hello</title>
+</head>
+<!-- PASSING DATA TO VIEWS -->
+<body>
+
+<h1>This is the View Lecture Notes page</h1>
+
+<!-- Displays name set in ViewLecture.java line 21. Does not display "YoMama" -->
+<h2>Who's so fat?  <span th:text="${name}">YoMama</span>!</h2>
+
+</body>
+</html>

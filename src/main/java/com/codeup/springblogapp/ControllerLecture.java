@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.*;
 
 
 @Controller // says this is an MVC controller
-public class HelloController{
+public class ControllerLecture {
 
     @GetMapping("/landing") // URL map for a doGet
     @ResponseBody //whatever is returned will be displayed as HTML
