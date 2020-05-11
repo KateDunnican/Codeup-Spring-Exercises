@@ -1,11 +1,13 @@
 package com.codeup.springblogapp;
 
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 // -------------------------------------------- SPRING CONTROLLERS EXERCISE 2
 
+@Controller
 public class MathController {
 
     @GetMapping("/add/{x}/and/{y}")
@@ -22,15 +24,17 @@ public class MathController {
         return "" + theAnswer;
     }
 
-    @GetMapping("/mult/{x}/and/{y}")
+    @GetMapping("/multi/{x}/and/{y}")
     @ResponseBody
-    public int mult(@PathVariable int x, @PathVariable int y){
-        return x * y;
+    public String multi(@PathVariable int x, @PathVariable int y){
+        int theAnswer = x * y;
+        return "" + theAnswer;
     }
 
     @GetMapping("/div/{x}/by/{y}")
     @ResponseBody
-    public int div(@PathVariable int x, @PathVariable int y){
-        return x / y;
+    public String div(@PathVariable int x, @PathVariable int y){
+        int theAnswer = x / y;
+        return "" + theAnswer;
     }
 }
