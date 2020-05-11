@@ -10,14 +10,14 @@ import org.springframework.web.bind.annotation.*;
 @Controller // says this is an MVC controller
 public class HelloController{
 
-    @GetMapping("/") // URL map for a doGet
+    @GetMapping("/landing") // URL map for a doGet
     @ResponseBody //whatever is returned will be displayed as HTML
     public String landing(){
         return "Welcome to the landing page!";
     }
 
     // can have multiple methods in this class, one for each url map
-    @GetMapping("/hello")
+    @GetMapping("/helloLecture")
     @ResponseBody
     public String helloSpring(){
         return "Hello from Spring!";
