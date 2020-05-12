@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Partials</title>
+</head>
+
+<!--VIEWS EXERCISE 2-->
+
+<body>
+
+<!-- NavBar Partial -->
+
+<div th:fragment="nav-partial">
+    <nav>
+        <a href="">My</a>
+        <a href="">Really</a>
+        <a href="">Great</a>
+        <a href="">Nav</a>
+    </nav>
+</div>
+
+<!-- Header Partial -->
+
+<div th:fragment="head-partial">
+    <header>My Really Great Header</header>
+</div>
+
+<!-- Footer Partial -->
+
+<div th:fragment="foot-partial">
+    <footer>My Really Great Footer</footer>
+</div>
+
+</body>
+</html>
