@@ -15,7 +15,7 @@ public class ViewLecture {
 // -------------------------------- PASSING DATA TO VIEWS
 
     @GetMapping("/whatever")
-    // Note that there's no @ResponseBody
+    // Note that there's no @ResponseBody, because the return value (the view file) will act as the response body.
     public String welcome() {
         return "ViewLectureHello"; // this needs to match the name of the HTML file you want it to display
     }
