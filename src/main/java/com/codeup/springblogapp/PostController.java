@@ -2,10 +2,7 @@ package com.codeup.springblogapp;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 
@@ -14,41 +11,57 @@ import java.util.ArrayList;
 @Controller
 public class PostController {
 
-
 // ---------- STUFF FOR REPO AND JPA EXERCISE (dependency injection) --------
     private final PostRepository postDao; // creates an instance of the PostRepository Interface
 
     public PostController(PostRepository postDao) {
         this.postDao = postDao;
     }
-
+//  SHOW ALL POSTS - DONE
     @GetMapping("/posts")
     public String showAll(Model model) {
         model.addAttribute("allThePosts", postDao.findAll());
         return "posts/index";
     }
+        // SHOW AN INDIVIDUAL POST - DONE
+        @GetMapping("/posts/{id}")
+        public String showOne(@PathVariable long id,  Model model) {
+            model.addAttribute("post", postDao.getOne(id));
+            return "posts/show";
+        }
+            // EDIT FORM FOR INDIVIDUAL POST - DONE
+            @GetMapping("/posts/edit/{id}")
+            public String editOne(@PathVariable long id, Model model){
+                model.addAttribute("post", postDao.getOne(id));
+                return "posts/editORdelete";
+            }
+                // EDITED INDIVIDUAL POST - IN PROGRESS
+                @PostMapping("/posts/edit/{id}")
+                public String editedOne(@RequestParam(name = "title") String title, @RequestParam(name = "body") String body, @PathVariable long id, Model model){
 
-//    @GetMapping("/posts/edit")
-//    public String editOne(Model model) {
-//        model.addAttribute("allThePosts", postDao.save());
-//        return "posts/index";
-//    }
-//
-//    @GetMapping("/posts/delete")
-//    public String deleteOne(Model model) {
-//        model.addAttribute("allThePosts", postDao.delete());
-//        return "posts/index";
-//    }
+                    Post editedPost = postDao.getOne(id);
+                        editedPost.setTitle(title);
+                        editedPost.setBody(body);
 
-    //put edit and delete here
+                    model.addAttribute("post", postDao.save(editedPost));
+
+//                    model.addAttribute("post", postDao.getOne(id));
+                    return "posts/show";
+                }
+            // DELETE INDIVIDUAL POST - Don't need?
+//            @GetMapping("/posts/delete/{id}")
+//            public String deleteOne(@PathVariable long id, Model model) {
+//                model.addAttribute("post", postDao.getOne(id));
+//                return "posts/editORdelete";
+//            }
+                // YOU DELETED IT PAGE
+                @PostMapping("/posts/{id}")
+                @ResponseBody
+                public String deletedOne(@PathVariable long id){
+                    return "You have deleted" + id;
+                }
 
 //    ------------------------------------------------------------------------
-
-    @GetMapping("/posts/{id}")
-    @ResponseBody
-    public String postsId(@PathVariable int id){
-        return "view the individual post with the id: " + id;
-    }
 
     @GetMapping("/posts/create")
     @ResponseBody
@@ -63,6 +76,7 @@ public class PostController {
         }
 
 // ----------------------------- VIEWS EXERCISE 3
+    // DONE DON'T TOUCH THEM, THEY WORK
     @GetMapping("/allposts")
     public String allPosts(Model model){
         ArrayList<Post> allThePosts = new ArrayList<>();

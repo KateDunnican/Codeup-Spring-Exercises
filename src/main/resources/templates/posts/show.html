@@ -7,9 +7,10 @@
 <body>
 
 <div>
-    <h1>You got to the show.html page!</h1>
-    <h1 th:text="${allThePosts[i].title}"></h1>
-    <p th:text="${allThePosts[i].body}"></p>
+    <h1>This is show.html</h1>
+    <h2 th:text="${post.title}"></h2>
+    <p th:text="${post.body}"></p>
+    <a th:href="'/posts/edit/' + ${post.id}">Edit</a>   <a href="">Delete</a>
 </div>
 
 </body>
