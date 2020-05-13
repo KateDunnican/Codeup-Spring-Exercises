@@ -7,7 +7,9 @@
 <body>
 
 <div th:each="post : ${allThePosts}">
-    <a th:href="@{/allposts/${allThePosts.indexOf(post)}}" th:text="${post.getTitle()}"></a>
+    <!-- concat it -->
+    <a th:href="@{'/allposts/' + ${post.id}}" th:text="${post.title}"></a>
 </div>
+
 </body>
 </html>

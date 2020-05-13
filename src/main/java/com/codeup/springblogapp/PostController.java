@@ -16,17 +16,32 @@ public class PostController {
 
 
 // ---------- STUFF FOR REPO AND JPA EXERCISE (dependency injection) --------
-    private final PostRepository postDao;
+    private final PostRepository postDao; // creates an instance of the PostRepository Interface
 
     public PostController(PostRepository postDao) {
         this.postDao = postDao;
     }
 
     @GetMapping("/posts")
-    public String index(Model model) {
-        model.addAttribute("posts", postDao.findAll());
+    public String showAll(Model model) {
+        model.addAttribute("allThePosts", postDao.findAll());
         return "posts/index";
     }
+
+//    @GetMapping("/posts/edit")
+//    public String editOne(Model model) {
+//        model.addAttribute("allThePosts", postDao.save());
+//        return "posts/index";
+//    }
+//
+//    @GetMapping("/posts/delete")
+//    public String deleteOne(Model model) {
+//        model.addAttribute("allThePosts", postDao.delete());
+//        return "posts/index";
+//    }
+
+    //put edit and delete here
+
 //    ------------------------------------------------------------------------
 
     @GetMapping("/posts/{id}")
@@ -48,31 +63,49 @@ public class PostController {
         }
 
 // ----------------------------- VIEWS EXERCISE 3
-//    @GetMapping("/allposts")
-//    public String allPosts(Model model){
-//        ArrayList<Post> allThePosts = new ArrayList<>();
-//
-//        Post Post1 = new Post();
-//            Post1.setTitle("Post 1");
-//            Post1.setBody("The body of post 1...so much body...such post");
-//
-//        Post Post2 = new Post();
-//            Post2.setTitle("Post 2");
-//            Post2.setBody("The body of post 2...so much body...such post");
-//
-//        allThePosts.add(Post1);
-//        allThePosts.add(Post2);
-//
-//        model.addAttribute("allThePosts", allThePosts);
-//
-//        return "posts/index";
-//    }
+    @GetMapping("/allposts")
+    public String allPosts(Model model){
+        ArrayList<Post> allThePosts = new ArrayList<>();
 
-//    @GetMapping("/allposts/{i}")
-//    public String sayHey(@PathVariable int i , Model model){
-//        model.addAttribute("i", i);
-////        model.addAttribute("post", post);
-//
-//        return "posts/show";
-//    }
+        Post Post1 = new Post();
+            Post1.setId(1);
+            Post1.setTitle("Post 1");
+            Post1.setBody("The body of post 1...so much body...such post");
+
+        Post Post2 = new Post();
+            Post2.setId(2);
+            Post2.setTitle("Post 2");
+            Post2.setBody("The body of post 2...so much body...such post");
+
+        allThePosts.add(Post1);
+        allThePosts.add(Post2);
+
+        model.addAttribute("allThePosts", allThePosts);
+
+        return "posts/index";
+    }
+
+    @GetMapping("/allposts/{i}")
+    public String sayHey(@PathVariable long i , Model model){
+
+        ArrayList<Post> allThePosts = new ArrayList<>();
+
+        Post Post1 = new Post();
+        Post1.setId(1);
+        Post1.setTitle("Post 1");
+        Post1.setBody("The body of post 1...so much body...such post");
+
+        Post Post2 = new Post();
+        Post2.setId(2);
+        Post2.setTitle("Post 2");
+        Post2.setBody("The body of post 2...so much body...such post");
+
+        allThePosts.add(Post1);
+        allThePosts.add(Post2);
+
+        model.addAttribute("allThePosts", allThePosts);
+        model.addAttribute("i", i);
+
+        return "posts/show";
+    }
 }

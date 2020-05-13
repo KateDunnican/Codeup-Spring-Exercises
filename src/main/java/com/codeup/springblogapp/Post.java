@@ -3,8 +3,9 @@ package com.codeup.springblogapp;
 import javax.persistence.*;
 
 // ----------------------------------- VIEWS EXERCISE 3
+// The annotations are using Spring to make a table without a MySQL migration file.
 @Entity
-@Table (name = "posts")  // WTF?
+@Table (name = "posts")
 public class Post {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -16,6 +17,8 @@ public class Post {
     @Column (name = "body", nullable = false)
     private String body;
 
+
+    // Constructors
     public Post () {
     }
 
@@ -25,6 +28,8 @@ public class Post {
         this.body =  body;
     }
 
+
+    // Getters and Setters
     public long getId() {
         return id;
     }
