@@ -32,3 +32,4 @@ build/
 
 ### Other Spring Ignores Stuff ###
 src/main/resources/application.properties
+NewUser.sql
