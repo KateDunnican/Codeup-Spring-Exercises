@@ -13,11 +13,21 @@ import java.util.ArrayList;
 
 @Controller
 public class PostController {
-    @GetMapping("/posts")
-    @ResponseBody
-    public String posts(){
-        return "posts index page";
+
+
+// ---------- STUFF FOR REPO AND JPA EXERCISE (dependency injection) --------
+    private final PostRepository postDao;
+
+    public PostController(PostRepository postDao) {
+        this.postDao = postDao;
     }
+
+    @GetMapping("/posts")
+    public String index(Model model) {
+        model.addAttribute("posts", postDao.findAll());
+        return "posts/index";
+    }
+//    ------------------------------------------------------------------------
 
     @GetMapping("/posts/{id}")
     @ResponseBody
@@ -31,39 +41,38 @@ public class PostController {
         return "view the form for creating a post!";
     }
 
-    @PostMapping("/posts/create")
-    @ResponseBody
-    public String postsCreateP(){ // would normally be a void, but for this exercise...
-        return "create a new post or something idk"; // was this supposed to be more complex?
-    }
+        @PostMapping("/posts/create")
+        @ResponseBody
+        public String postsCreateP(){
+            return "create a new post or something idk"; // was this supposed to be more complex?
+        }
 
 // ----------------------------- VIEWS EXERCISE 3
-    @GetMapping("/allposts")
-    public String allPosts(Model model){
-        ArrayList<Post> allThePosts = new ArrayList<>();
+//    @GetMapping("/allposts")
+//    public String allPosts(Model model){
+//        ArrayList<Post> allThePosts = new ArrayList<>();
+//
+//        Post Post1 = new Post();
+//            Post1.setTitle("Post 1");
+//            Post1.setBody("The body of post 1...so much body...such post");
+//
+//        Post Post2 = new Post();
+//            Post2.setTitle("Post 2");
+//            Post2.setBody("The body of post 2...so much body...such post");
+//
+//        allThePosts.add(Post1);
+//        allThePosts.add(Post2);
+//
+//        model.addAttribute("allThePosts", allThePosts);
+//
+//        return "posts/index";
+//    }
 
-        Post Post1 = new Post();
-            Post1.setTitle("Post 1");
-            Post1.setBody("The body of post 1...so much body...such post");
-
-        Post Post2 = new Post();
-            Post2.setTitle("Post 2");
-            Post2.setBody("The body of post 2...so much body...such post");
-
-        allThePosts.add(Post1);
-        allThePosts.add(Post2);
-
-        model.addAttribute("allThePosts", allThePosts);
-
-        return "posts/index";
-    }
-
-    @GetMapping("/allposts/{i}")
-    public String sayHey(@PathVariable int i , Model model){
-        model.addAttribute("i", i);
-//        model.addAttribute("post", post);
-
-        return "posts/show";
-    }
-
+//    @GetMapping("/allposts/{i}")
+//    public String sayHey(@PathVariable int i , Model model){
+//        model.addAttribute("i", i);
+////        model.addAttribute("post", post);
+//
+//        return "posts/show";
+//    }
 }
