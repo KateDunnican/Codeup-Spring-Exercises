@@ -43,10 +43,9 @@ public class PostController {
                         editedPost.setTitle(title);
                         editedPost.setBody(body);
 
-                    model.addAttribute("post", postDao.save(editedPost));
+                    postDao.save(editedPost);
 
-//                    model.addAttribute("post", postDao.getOne(id));
-                    return "posts/show";
+                    return "redirect:/posts/" + id; //go to endpoint
                 }
             // DELETE INDIVIDUAL POST - Don't need?
 //            @GetMapping("/posts/delete/{id}")
