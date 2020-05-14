@@ -17,9 +17,17 @@ public class Post {
     @Column (name = "body", nullable = false)
     private String body;
 
+    @ManyToOne
+    @JoinColumn(name = "user_id")
+    private User user;
 
     // Constructors
     public Post () {
+    }
+
+    public Post (String title, String body){
+        this.title = title;
+        this.body =  body;
     }
 
     public Post (long id, String title, String body){
@@ -27,7 +35,6 @@ public class Post {
         this.title = title;
         this.body =  body;
     }
-
 
     // Getters and Setters
     public long getId() {
