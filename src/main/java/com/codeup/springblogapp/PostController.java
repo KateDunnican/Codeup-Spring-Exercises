@@ -56,7 +56,7 @@ public class PostController {
                 }
 
 //    ------------------------------------------------------------------------
-
+    // CREATE NEW POST - IN PROGRESS
     @GetMapping("/posts/create")
     @ResponseBody
     public String postsCreate(){
