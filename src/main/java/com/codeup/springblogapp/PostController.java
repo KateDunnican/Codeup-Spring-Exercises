@@ -4,7 +4,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
-import java.io.PipedOutputStream;
 import java.util.ArrayList;
 
 // -------------------------------------------- SPRING CONTROLLERS EXERCISE 3
@@ -34,7 +33,7 @@ public class PostController {
             @GetMapping("/posts/edit/{id}")
             public String editOne(@PathVariable long id, Model model){
                 model.addAttribute("post", postDao.getOne(id));
-                return "posts/editORdelete";
+                return "posts/edit";
             }
                 // EDITED INDIVIDUAL POST - DONE
                 @PostMapping("/posts/edit/{id}")
@@ -46,20 +45,14 @@ public class PostController {
 
                     postDao.save(editedPost);
 
-                    return "redirect:/posts/" + id; //go to endpoint
+                    return "redirect:/posts/" + id; //go to endpoint (redirects to showOne method)
                 }
-            // DELETE INDIVIDUAL POST - Don't need?
-//            @GetMapping("/posts/delete/{id}")
-//            public String deleteOne(@PathVariable long id, Model model) {
-//                model.addAttribute("post", postDao.getOne(id));
-//                return "posts/editORdelete";
-//            }
-                // YOU DELETED IT PAGE
+                // DELETE - DONE
                 @PostMapping("/posts/{id}")
                 public String deletedOne(@PathVariable long id){
                     Post postToDelete = postDao.getOne(id);
                     postDao.delete(postToDelete);
-                    return "redirect:/posts"; //go to endpoint
+                    return "redirect:/posts"; //go to endpoint (redirects to showAll method)
                 }
 
 //    ------------------------------------------------------------------------
