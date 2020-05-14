@@ -4,6 +4,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.io.PipedOutputStream;
 import java.util.ArrayList;
 
 // -------------------------------------------- SPRING CONTROLLERS EXERCISE 3
@@ -35,7 +36,7 @@ public class PostController {
                 model.addAttribute("post", postDao.getOne(id));
                 return "posts/editORdelete";
             }
-                // EDITED INDIVIDUAL POST - IN PROGRESS
+                // EDITED INDIVIDUAL POST - DONE
                 @PostMapping("/posts/edit/{id}")
                 public String editedOne(@RequestParam(name = "title") String title, @RequestParam(name = "body") String body, @PathVariable long id, Model model){
 
@@ -55,9 +56,10 @@ public class PostController {
 //            }
                 // YOU DELETED IT PAGE
                 @PostMapping("/posts/{id}")
-                @ResponseBody
                 public String deletedOne(@PathVariable long id){
-                    return "You have deleted" + id;
+                    Post postToDelete = postDao.getOne(id);
+                    postDao.delete(postToDelete);
+                    return "redirect:/posts"; //go to endpoint
                 }
 
 //    ------------------------------------------------------------------------

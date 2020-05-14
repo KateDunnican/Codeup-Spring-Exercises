@@ -10,7 +10,11 @@
     <h1>This is show.html</h1>
     <h2 th:text="${post.title}"></h2>
     <p th:text="${post.body}"></p>
-    <a th:href="'/posts/edit/' + ${post.id}">Edit</a>   <a href="">Delete</a>
+    <a th:href="'/posts/edit/' + ${post.id}">Edit</a>
+    <form th:action="'/posts/' + ${post.id}" method="post">
+        <input type="submit" value="Delete" name="delete">
+    </form>
+
 </div>
 
 </body>
