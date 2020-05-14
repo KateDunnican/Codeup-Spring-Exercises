@@ -11,11 +11,16 @@ import java.util.ArrayList;
 @Controller
 public class PostController {
 
-// ---------- STUFF FOR REPO AND JPA EXERCISE (dependency injection) --------
+// ---------- STUFF FOR RELATIONSHIPS EXERCISE (dependency injection) --------
+    private final UserRepository userDao;
+
+
+    // ---------- STUFF FOR REPO AND JPA EXERCISE (dependency injection) --------
     private final PostRepository postDao; // creates an instance of the PostRepository Interface
 
-    public PostController(PostRepository postDao) {
+    public PostController(UserRepository userDao, PostRepository postDao) {
         this.postDao = postDao;
+        this.userDao = userDao; // see line 15
     }
 //  SHOW ALL POSTS - DONE
     @GetMapping("/posts")
