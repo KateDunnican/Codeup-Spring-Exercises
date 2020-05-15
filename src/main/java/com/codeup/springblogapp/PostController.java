@@ -42,7 +42,7 @@ public class PostController {
             }
                 // EDITED INDIVIDUAL POST - DONE
                 @PostMapping("/posts/edit/{id}")
-                public String editedOne(@RequestParam(name = "title") String title, @RequestParam(name = "body") String body, @PathVariable long id, Model model){
+                public String editedOne(@RequestParam(name = "title") String title, @RequestParam(name = "body") String body, @PathVariable long id){
 
                     Post editedPost = postDao.getOne(id);
                         editedPost.setTitle(title);
@@ -63,15 +63,21 @@ public class PostController {
 //    ------------------------------------------------------------------------
     // CREATE NEW POST - IN PROGRESS
     @GetMapping("/posts/create")
-    @ResponseBody
     public String postsCreate(){
-        return "view the form for creating a post!";
+        return "posts/create";
     }
 
         @PostMapping("/posts/create")
-        @ResponseBody
-        public String postsCreateP(){
-            return "create a new post or something idk"; // was this supposed to be more complex?
+        public String postsCreateP(@RequestParam(name = "title") String title, @RequestParam(name = "body") String body){
+
+            Post newPost = new Post();
+                newPost.setTitle(title);
+                newPost.setBody(body);
+                newPost.setUser(userDao.getOne(1L)); // Make this dynamic later
+
+            postDao.save(newPost);
+
+            return "redirect:/posts"; //go to endpoint (redirects to showAll method)
         }
 
 // ----------------------------- VIEWS EXERCISE 3

@@ -67,4 +67,11 @@ public class User {
     public void setUsername(String username) {
         this.username = username;
     }
+
+    public List<Post> getPosts() {
+        return posts;
+    }
+    public void setPosts(List<Post> posts) {
+        this.posts = posts;
+    }
 }
