@@ -46,6 +46,11 @@
 			<artifactId>bootstrap</artifactId>
 			<version>4.4.1-1</version>
 		</dependency>
+		<dependency>
+			<groupId>org.webjars</groupId>
+			<artifactId>webjars-locator</artifactId>
+			<version>0.40</version>
+		</dependency>
 		<!--	MySQL stuff	-->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>

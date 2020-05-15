@@ -71,9 +71,9 @@ public class PostController {
         public String postsCreateP(@RequestParam(name = "title") String title, @RequestParam(name = "body") String body) {
 
             Post newPost = new Post();
-            newPost.setTitle(title);
-            newPost.setBody(body);
-            newPost.setUser(userDao.getOne(1L)); // Make this dynamic later
+                newPost.setTitle(title);
+                newPost.setBody(body);
+                newPost.setUser(userDao.getOne(1L)); // Make this dynamic later
 
             postDao.save(newPost);
 

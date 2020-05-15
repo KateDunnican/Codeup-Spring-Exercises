@@ -5,30 +5,44 @@
     <title>Partials</title>
 </head>
 
-<!--VIEWS EXERCISE 2-->
+                                            <!--PARTIALS/FRAGMENTS-->
 
 <body>
 
-<!-- NavBar Partial -->
+<!-- Head Fragment that includes Bootstrap -->
+<head th:fragment="head">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="/webjars/bootstrap/4.4.1-1/css/bootstrap.min.css">
+    <title>Fragment Head Title</title>
+</head>
 
-<div th:fragment="nav-partial">
-    <nav>
-        <a href="">My</a>
-        <a href="">Really</a>
-        <a href="">Great</a>
-        <a href="">Nav</a>
-    </nav>
+<!-- Header Fragment -->
+
+<div th:fragment="header">
+    <header>Welcome to Splog!</header>
 </div>
 
-<!-- Header Partial -->
+<!-- NavBar Fragment -->
 
-<div th:fragment="head-partial">
-    <header>My Really Great Header</header>
-</div>
+<nav th:fragment="nav" class="navbar navbar-expand-lg navbar-light bg-light">
+    <a class="navbar-brand" href="#">Welcome to Splog!</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+        <div class="navbar-nav">
+            <a class="nav-item nav-link active" href="#">My<span class="sr-only">(current)</span></a>
+            <a class="nav-item nav-link" href="#">Really</a>
+            <a class="nav-item nav-link" href="#">Great</a>
+            <a class="nav-item nav-link" href="#">Nav</a>
+        </div>
+    </div>
+</nav>
 
-<!-- Footer Partial -->
+<!-- Footer Fragment -->
 
-<div th:fragment="foot-partial">
+<div th:fragment="footer">
     <footer>My Really Great Footer</footer>
 </div>
 

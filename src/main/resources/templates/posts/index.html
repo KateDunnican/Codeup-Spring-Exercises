@@ -1,10 +1,11 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
-<head>
+<head th:replace="Partials :: head">
     <meta charset="UTF-8">
     <title>All Posts</title>
 </head>
 <body>
+<div th:replace="Partials :: nav"></div>
 
 <div th:each="post : ${allThePosts}">
     <!-- concat it -->
@@ -14,5 +15,6 @@
 <a href="/posts/create">Create New Post</a>
 
 
+<div th:replace="Partials :: footer"></div>
 </body>
 </html>
