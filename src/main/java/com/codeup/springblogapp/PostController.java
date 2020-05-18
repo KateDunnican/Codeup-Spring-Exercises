@@ -81,8 +81,8 @@ public class PostController {
             post.setUser(userDao.getOne(1L));
             postDao.save(post);
 
-            String subject = "New Post Created";
-            String body = "A new post has been created!";
+            String subject = "A new post has been created: " + post.getTitle();
+            String body = post.getBody();
             emailService.prepareAndSend(post, subject, body);
 
             return "redirect:/posts"; //go to endpoint (redirects to showAll method)
