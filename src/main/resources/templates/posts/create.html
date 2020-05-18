@@ -7,15 +7,25 @@
 <body>
 <div th:replace="Partials :: nav"></div>
 
-    <form action="/posts/create" method="post">
-
-        <input type="text" name="title" value="title">
+<!-- Modified Form -->
+    <form th:action="@{/posts/create}" th:method="post" th:object="${post}">
+        Title:
+        <input th:field="*{title}">
         <br>
-        <input type="text" name="body" value="body" >
+        Body:
+        <input th:field="*{body}">
         <br>
-        <input type="submit" value="Submit">
-
+        <input type="submit">
     </form>
+
+<!--&lt;!&ndash; Old Form &ndash;&gt;-->
+<!--    <form action="/posts/create" method="post">-->
+<!--    <input type="text" name="title" value="title">-->
+<!--    <br>-->
+<!--    <input type="text" name="body" value="body">-->
+<!--    <br>-->
+<!--    <input type="submit" value="Submit">-->
+<!--</form>-->
 
 <div th:replace="Partials :: footer"></div>
 </body>

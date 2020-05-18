@@ -39,19 +39,26 @@ public class PostController {
         model.addAttribute("post", postDao.getOne(id));
         return "posts/edit";
     }
-
-        // EDITING ONE POST
+        // EDITING ONE POST ---------- Modified Way
         @PostMapping("/posts/edit/{id}")
-        public String editedPost(@RequestParam(name = "title") String title, @RequestParam(name = "body") String body, @PathVariable long id) {
-
-            Post editedPost = postDao.getOne(id);
-            editedPost.setTitle(title);
-            editedPost.setBody(body);
-
-            postDao.save(editedPost);
-
+        public String editedPost(@ModelAttribute Post post , @PathVariable long id) {
+            post.setUser(userDao.getOne(1L));
+            postDao.save(post);
             return "redirect:/posts/" + id; //go to endpoint (redirects to showOne method)
         }
+
+//        // EDITING ONE POST  ----------- OLD WAY
+//        @PostMapping("/posts/edit/{id}")
+//        public String editedPost(@RequestParam(name = "title") String title, @RequestParam(name = "body") String body, @PathVariable long id) {
+//
+//            Post editedPost = postDao.getOne(id);
+//            editedPost.setTitle(title);
+//            editedPost.setBody(body);
+//
+//            postDao.save(editedPost);
+//
+//            return "redirect:/posts/" + id; //go to endpoint (redirects to showOne method)
+//        }
 
     // DELETE
     @PostMapping("/posts/{id}")
@@ -61,22 +68,36 @@ public class PostController {
         return "redirect:/posts"; //go to endpoint (redirects to showAll method)
     }
 
-    // CREATE POST PAGE
+    // CREATE POST PAGE  --------------- MODIFIED WAY
     @GetMapping("/posts/create")
-    public String postsCreate() {
+    public String postsCreate(Model model) {
+        model.addAttribute("post", new Post());
         return "posts/create";
     }
         // CREATING POST
         @PostMapping("/posts/create")
-        public String postsCreateP(@RequestParam(name = "title") String title, @RequestParam(name = "body") String body) {
-
-            Post newPost = new Post();
-                newPost.setTitle(title);
-                newPost.setBody(body);
-                newPost.setUser(userDao.getOne(1L)); // Make this dynamic later
-
-            postDao.save(newPost);
-
+        public String postsCreateP(@ModelAttribute Post post) {
+            post.setUser(userDao.getOne(1L));
+            postDao.save(post);
             return "redirect:/posts"; //go to endpoint (redirects to showAll method)
         }
+
+//    // CREATE POST PAGE  --------------- OLD WAY
+//    @GetMapping("/posts/create")
+//    public String postsCreate() {
+//        return "posts/create";
+//    }
+//    // CREATING POST
+//    @PostMapping("/posts/create")
+//    public String postsCreateP(@RequestParam(name = "title") String title, @RequestParam(name = "body") String body) {
+//
+//        Post newPost = new Post();
+//        newPost.setTitle(title);
+//        newPost.setBody(body);
+//        newPost.setUser(userDao.getOne(1L)); // Make this dynamic later
+//
+//        postDao.save(newPost);
+//
+//        return "redirect:/posts"; //go to endpoint (redirects to showAll method)
+//    }
 }
