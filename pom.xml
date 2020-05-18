@@ -60,6 +60,12 @@
 			<groupId>mysql</groupId>
 			<artifactId>mysql-connector-java</artifactId>
 		</dependency>
+		<!--	Services Email Dependency 	-->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-mail</artifactId>
+			<version>2.1.2.RELEASE</version>
+		</dependency>
 	</dependencies>
 
 	<build>

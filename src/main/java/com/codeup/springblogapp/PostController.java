@@ -10,13 +10,14 @@ import java.util.ArrayList;
 
 @Controller
 public class PostController {
-
+    private final EmailService emailService;
     private final UserRepository userDao; // creates an instance of the UserRepository Interface
     private final PostRepository postDao; // creates an instance of the PostRepository Interface
 
-    public PostController(UserRepository userDao, PostRepository postDao) { // Constructor for the PostController class
+    public PostController(EmailService emailService, UserRepository userDao, PostRepository postDao) { // Constructor for the PostController class
         this.postDao = postDao;
         this.userDao = userDao;
+        this.emailService = emailService;
     }
 
     //  SHOW ALL POSTS
@@ -79,6 +80,11 @@ public class PostController {
         public String postsCreateP(@ModelAttribute Post post) {
             post.setUser(userDao.getOne(1L));
             postDao.save(post);
+
+            String subject = "New Post Created";
+            String body = "A new post has been created!";
+            emailService.prepareAndSend(post, subject, body);
+
             return "redirect:/posts"; //go to endpoint (redirects to showAll method)
         }
 
