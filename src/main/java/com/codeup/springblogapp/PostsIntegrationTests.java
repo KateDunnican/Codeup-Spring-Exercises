@@ -14,9 +14,7 @@ import org.springframework.mock.web.MockHttpSession;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
-
 import javax.servlet.http.HttpSession;
-
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.redirectedUrl;
 
 // Trant's imports
@@ -144,17 +142,18 @@ public class PostsIntegrationTests {
         this.mvc.perform(
                 post("/posts/create").with(csrf())
                         .session((MockHttpSession) httpSession)
-                        .param("title", "post to be deleted")
-                        .param("body", "won't last long"))
+                        .param("title", "DELETE")
+                        .param("body", "EXISTENCE IS PAIN"))
                 .andExpect(status().is3xxRedirection());
 
-        // Get the recent Post that matches the title
+        // Loop through the List<Post> to find the Post just made that matches the title
         List<Post> allThePosts = postDao.findAll();
         Post existingPost = new Post();
 
         for (Post post: allThePosts) {
-            if (post.getTitle().equals("post to be deleted")){
+            if (post.getTitle().equals("DELETE")){
                 existingPost = postDao.getOne(post.getId());
+                break;
             }
         }
 
