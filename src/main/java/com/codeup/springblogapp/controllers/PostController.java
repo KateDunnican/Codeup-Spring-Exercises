@@ -71,8 +71,7 @@ public class PostController {
         // CREATING POST
         @PostMapping("/posts/create")
         public String postsCreateP(@ModelAttribute Post post) {
-                        // Why doesn't this work????
-            User author = (User) SecurityContextHolder.getContext().getAuthentication();
+            User author = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
             post.setUser(author);
             postDao.save(post);
 
