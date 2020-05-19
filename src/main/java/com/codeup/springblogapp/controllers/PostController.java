@@ -5,6 +5,7 @@ import com.codeup.springblogapp.models.Post;
 
 import com.codeup.springblogapp.models.User;
 
+import com.codeup.springblogapp.models.UserWithRoles;
 import com.codeup.springblogapp.repositories.PostRepository;
 import com.codeup.springblogapp.repositories.UserRepository;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -33,23 +34,36 @@ public class PostController {
         return "posts/index";
     }
 
-    // SHOW ONE POST
-    @GetMapping("/posts/{id}")
-    public String showOne(@PathVariable long id, Model model) {
-        model.addAttribute("post", postDao.getOne(id));
-        return "posts/show";
-    }
+        // SHOW ONE POST
+        @GetMapping("/posts/{id}")
+        public String showOne(@PathVariable long id, Model model) {
+            model.addAttribute("post", postDao.getOne(id));
+            return "posts/show";
+        }
 
     // EDIT ONE POST PAGE
     @GetMapping("/posts/edit/{id}")
     public String editPage(@PathVariable long id, Model model) {
         model.addAttribute("post", postDao.getOne(id));
-        return "posts/edit";
+
+        User loggedInUser = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        User author = postDao.getOne(id).getUser();
+
+        if (author.getId() == loggedInUser.getId()) {
+            return "posts/edit";
+        } else {
+            return "posts/ohNoGirl";
+//            return "redirect:/login?logout";
+        }
     }
+
         // EDITING ONE POST ---------- Modified Way
         @PostMapping("/posts/edit/{id}")
-        public String editedPost(@ModelAttribute Post post , @PathVariable long id) {
-            post.setUser(userDao.getOne(1L));
+        public String editedPost(@ModelAttribute Post post, @PathVariable long id) {
+
+            User author = postDao.getOne(id).getUser();
+            post.setUser(author);
+
             postDao.save(post);
             return "redirect:/posts/" + id; //go to endpoint (redirects to showOne method)
         }
@@ -62,12 +76,13 @@ public class PostController {
         return "redirect:/posts"; //go to endpoint (redirects to showAll method)
     }
 
-    // CREATE POST PAGE  --------------- MODIFIED WAY
+    // CREATE POST PAGE
     @GetMapping("/posts/create")
     public String postsCreate(Model model) {
         model.addAttribute("post", new Post());
         return "posts/create";
     }
+
         // CREATING POST
         @PostMapping("/posts/create")
         public String postsCreateP(@ModelAttribute Post post) {
