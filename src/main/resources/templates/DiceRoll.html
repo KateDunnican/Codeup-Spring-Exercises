@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta charset="UTF-8">
+    <th:block th:insert="Partials :: head"></th:block>
     <title>Dice Roll</title>
 </head>
 
@@ -9,7 +9,6 @@
 
 <body>
 
-<div th:replace="Partials :: head-partial" ></div>  <!--Part of EXERCISE 2-->
 <div th:replace="Partials :: nav-partial"></div>  <!--Part of EXERCISE 2-->
 <div th:replace="Partials :: foot-partial"></div>  <!--Part of EXERCISE 2-->
 
