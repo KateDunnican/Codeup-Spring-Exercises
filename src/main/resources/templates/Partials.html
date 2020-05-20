@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
-<!-- Head Fragment that includes Bootstrap -->
-<head th:fragment="head">
+<head>
     <meta charset="UTF-8" name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <link rel="stylesheet" href="/webjars/bootstrap/4.4.1-1/css/bootstrap.min.css">
 </head>
@@ -14,6 +13,7 @@
 <div th:fragment="head">
     <meta charset="utf-8" name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <link rel="stylesheet" href="/webjars/bootstrap/4.4.1-1/css/bootstrap.min.css">
+    <link rel="stylesheet" th:href="@{/SomeStyle.css}">
 </div>
 
 <!-- Header Fragment -->
@@ -24,7 +24,7 @@
 
 <!-- NavBar Fragment -->
 
-<nav th:fragment="nav" class="navbar navbar-expand-lg navbar-light bg-light">
+<nav th:fragment="nav" class="navbar navbar-expand-lg navbar-light "> <!-- removed bg-light -->
     <a class="navbar-brand" href="#">Welcome to Splog!</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
