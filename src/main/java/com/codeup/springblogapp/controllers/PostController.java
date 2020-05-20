@@ -53,7 +53,7 @@ public class PostController {
             return "posts/edit";
         } else {
             return "posts/ohNoGirl";
-//            return "redirect:/login?logout";
+            // return "redirect:/login?logout";
         }
     }
 
